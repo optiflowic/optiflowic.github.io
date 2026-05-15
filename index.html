@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optiflowic</title>
+<meta name="description" content="Optiflowic builds open-source tools and libraries to optimize your development flow.">
+<link rel="canonical" href="https://optiflowic.github.io">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optiflowic.github.io">
+<meta property="og:title" content="Optiflowic">
+<meta property="og:description" content="Open-source tools and libraries to optimize your development flow.">
+<meta property="og:site_name" content="Optiflowic">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Optiflowic">
+<meta name="twitter:description" content="Open-source tools and libraries to optimize your development flow.">
+<link rel="icon" href="https://github.com/optiflowic.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:            #0a1628;
+    --bg2:           #0f1e38;
+    --bg3:           #142040;
+    --border:        rgba(126,200,232,0.12);
+    --border-bright: rgba(126,200,232,0.28);
+    --text:          #e8f4ff;
+    --text-muted:    #7ec8e8;
+    --text-dim:      #2e5070;
+    --accent:        #7ec8e8;
+    --nav-bg:        rgba(10,22,40,0.88);
+    --mono:          'Space Mono', monospace;
+    --sans:          'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 2rem; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 16px; font-weight: 700;
+    color: var(--text); text-decoration: none;
+  }
+  .nav-logo img { width: 26px; height: 26px; border-radius: 50%; }
+  .nav-gh {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--text-muted); font-size: 14px; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-gh:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 140px 2rem 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(126,200,232,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(126,200,232,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 350px;
+    background: radial-gradient(ellipse at center, rgba(126,200,232,0.07), transparent 70%);
+    top: 20%; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .org-avatar {
+    width: 120px; height: 120px; border-radius: 50%;
+    margin-bottom: 28px;
+    animation: fadeSlideUp 0.5s ease both;
+  }
+  .hero h1 {
+    font-family: 'Plus Jakarta Sans', var(--sans);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700; letter-spacing: -2px; line-height: 1.05;
+    margin-bottom: 20px;
+    animation: fadeSlideUp 0.6s 0.1s ease both;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-muted); max-width: 480px;
+    font-weight: 300;
+    animation: fadeSlideUp 0.6s 0.2s ease both;
+  }
+
+  @keyframes fadeSlideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* PRODUCTS */
+  .products {
+    padding: 80px 2rem 120px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 40px; text-align: center;
+  }
+
+  .product-card {
+    display: flex; align-items: flex-start; gap: 28px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .product-card:hover {
+    border-color: var(--border-bright);
+    background: var(--bg3);
+  }
+  .product-card.placeholder {
+    border-style: dashed;
+    cursor: default;
+    opacity: 0.5;
+  }
+  .product-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    flex-shrink: 0; object-fit: contain;
+  }
+  .product-icon-placeholder {
+    width: 52px; height: 52px; border-radius: 12px;
+    flex-shrink: 0;
+    background: var(--bg3);
+    border: 1px dashed var(--border-bright);
+  }
+  .product-body { flex: 1; }
+  .product-name {
+    font-family: var(--mono); font-size: 20px; font-weight: 700;
+    color: var(--accent); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .badge-wip {
+    font-size: 11px; font-family: var(--mono);
+    background: rgba(126,200,232,0.08);
+    border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 8px;
+    color: var(--text-dim);
+  }
+  .product-desc {
+    font-size: 16px; color: var(--text-muted); line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .product-links { display: flex; gap: 16px; }
+  .product-link {
+    font-size: 13px; font-family: var(--mono);
+    color: var(--text-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .product-link:hover { color: var(--accent); }
+  .product-arrow {
+    position: absolute; right: 32px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim); font-size: 20px;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .product-card:not(.placeholder):hover .product-arrow {
+    color: var(--accent);
+    transform: translateY(-50%) translateX(4px);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  footer a {
+    color: var(--text-dim); font-size: 13px; font-family: var(--mono);
+    text-decoration: none; transition: color 0.2s;
+  }
+  footer a:hover { color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="https://github.com/optiflowic.png" alt="Optiflowic">
+    Optiflowic
+  </a>
+  <a href="https://github.com/optiflowic" class="nav-gh">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    GitHub
+  </a>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <img src="https://github.com/optiflowic.png" alt="Optiflowic" class="org-avatar">
+    <h1>Optiflowic</h1>
+    <p class="hero-sub">Open-source tools and libraries to optimize your development flow.</p>
+  </section>
+
+  <section class="products">
+    <div class="container">
+      <div class="section-label">Projects</div>
+
+      <div class="product-card" onclick="window.location='/kumolo-docs/'" style="cursor:pointer">
+        <img src="./kumolo.png" alt="kumolo" class="product-icon">
+        <div class="product-body">
+          <div class="product-name">
+            kumolo
+            <span class="badge-wip">early development</span>
+          </div>
+          <p class="product-desc">
+            High-fidelity AWS emulator for local development and testing.<br>
+            No mocks, no stubs — works exactly like real AWS.
+          </p>
+          <div class="product-links">
+            <a href="/kumolo-docs/" class="product-link" onclick="event.stopPropagation()">
+              Docs &rarr;
+            </a>
+            <a href="https://github.com/optiflowic/kumolo" class="product-link" onclick="event.stopPropagation()">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <span class="product-arrow">→</span>
+      </div>
+
+      <div class="product-card placeholder">
+        <div class="product-icon-placeholder"></div>
+        <div class="product-body">
+          <div class="product-name">More coming soon</div>
+          <p class="product-desc">More open-source tools are in the works.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a href="https://github.com/optiflowic">github.com/optiflowic</a>
+</footer>
+
+</body>
+</html>
